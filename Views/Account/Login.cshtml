@@ -1,0 +1,60 @@
+﻿@model InvoiceManagementSystem.Models.LoginViewModel
+
+<h2>Please Login</h2>
+
+@* <form action="/" method="post">
+    <input asp-for="Username" class="form-control mb-2" placeholder="Enter Your Username" />    
+    <input asp-for="Password" type="password" class="form-control mb-2" placeholder="Enter Your Password" />
+
+    <button type="submit" class="btn btn-primary">Login</button>
+
+
+</form> *@
+
+
+
+
+<section class="vh-100" >
+    <div class="container-fluid h-custom">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col-md-9 col-lg-6 col-xl-5">
+                <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.webp"
+                     class="img-fluid" alt="Sample image">
+            </div>
+            <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
+                <form action="/" method="post">
+                 
+
+                    <!-- Email input -->
+                    <div data-mdb-input-init class="form-outline mb-4">
+                        <input asp-for="Username"  placeholder="Enter Your Username"  id="form3Example3" class="form-control form-control-lg"
+                             />
+                        <label class="form-label" for="form3Example3">UserName</label>
+                    </div>
+
+                    <!-- Password input -->
+                    <div data-mdb-input-init class="form-outline mb-3">
+                        <input asp-for="Password" type="password"  placeholder="Enter Your Password"  id="form3Example4" class="form-control form-control-lg"/>
+                        <label class="form-label" for="form3Example4">Password</label>
+                    </div>
+
+                    
+
+                    <div class="text-center text-lg-start mt-4 pt-2">
+                        <button type="submit" data-mdb-button-init data-mdb-ripple-init class="btn btn-primary btn-lg"
+                                style="padding-left: 2.5rem; padding-right: 2.5rem;">
+                            Login
+                        </button>
+                       
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+@if (ViewBag.Error != null)
+{
+    <p class="text-danger">@ViewBag.Error</p>
+}

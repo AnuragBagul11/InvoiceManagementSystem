@@ -1,0 +1,87 @@
+﻿@model IEnumerable<InvoiceManagementSystem.Models.Invoice>
+
+<h2 class="mb-3">Invoice List</h2>
+
+<div class="mb-3">
+    <a asp-action="Create" class="btn btn-primary">Add Invoice</a>
+    <a asp-action="Export" class="btn btn-success ms-2">Export Excel</a>
+</div>
+
+<form method="get" class="row mb-3">
+    <div class="col-md-2">
+        <select name="status" class="form-control">
+            <option value="">All Status</option>
+            <option value="Draft">Draft</option>
+            <option value="Submitted">Submitted</option>
+            <option value="Paid">Paid</option>
+        </select>
+    </div>
+
+    <div class="col-md-2">
+        <select name="sortBy" class="form-control">
+            <option value="">Default Sorting</option>
+            <option value="date">Sort by Date</option>
+            <option value="amount">Sort by Amount</option>
+        </select>
+    </div>
+
+    <div class="col-md-2">
+        <input type="date" name="fromDate" class="form-control" />
+    </div>
+
+    <div class="col-md-2">
+        <input type="date" name="toDate" class="form-control" />
+    </div>
+
+    <div class="col-md-2">
+        <button type="submit" class="btn btn-info">Apply</button>
+    </div>
+</form>
+
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>Invoice No</th>
+            <th>Date</th>
+            <th>Customer</th>
+            <th>Total Amount</th>
+            <th>Tax Amount</th>
+            <th>Status</th>
+            <th style="width:120px;">Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model != null && Model.Any())
+        {
+            foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.InvoiceNumber</td>
+                    <td>@item.InvoiceDate.ToShortDateString()</td>
+                    <td>@item.CustomerName</td>
+                    <td>@item.TotalAmount</td>
+                    <td>@item.TaxAmount</td>
+                    <td>@item.Status</td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                        <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                    </td>
+                </tr>
+            }
+        }
+        else
+        {
+            <tr>
+                <td colspan="7" class="text-center text-danger">
+                    No invoices found
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<div class="mt-3">
+    <strong>Total Amount:</strong> @Model.Sum(x => x.TotalAmount)
+    <br />
+    <strong>Total Tax:</strong> @Model.Sum(x => x.TaxAmount)
+</div>
